@@ -203,8 +203,8 @@ generate_reality_keypair() {
   fi
   
   # 解析密钥对
-  PRIVATE_KEY=$(echo "$KEYPAIR" | grep "Private key" | awk -F: '{print $2}' | tr -d ' ')
-  PUBLIC_KEY=$(echo "$KEYPAIR" | grep "Public key" | awk -F: '{print $2}' | tr -d ' ')
+  PRIVATE_KEY=$(echo "$KEYPAIR" | grep "PrivateKey" | awk -F: '{print $2}' | tr -d ' ')
+  PUBLIC_KEY=$(echo "$KEYPAIR" | grep "Password" | awk -F: '{print $2}' | tr -d ' ')
   
   if [[ -z "$PRIVATE_KEY" || -z "$PUBLIC_KEY" ]]; then
     error "解析 REALITY 密钥对失败"
