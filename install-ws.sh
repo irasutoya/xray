@@ -270,7 +270,7 @@ print_client_config() {
   echo -e "${BLUE}====== 客户端配置 (VLESS URL) ======${NC}"
   echo "vless://${UUID}@${SERVER_IP}:${PORT}?type=ws&security=none&path=/&host=${SERVER_IP}&headers=host:${SERVER_IP}#${SERVER_IP}"
   echo
-  echo -e "${BLUE}====== Clash Meta 配置 ======${NC}"
+  echo -e "${BLUE}====== 客户端配置 (Clash Meta 格式) ======${NC}"
   echo "proxies:"
   echo "  - name: ${SERVER_IP}"
   echo "    server: ${SERVER_IP}"
