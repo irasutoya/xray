@@ -283,6 +283,7 @@ print_client_config() {
   echo "      headers:"
   echo "        host: ${SERVER_IP}"
   echo "    servername: ${SERVER_IP}"
+  echo "    client-fingerprint: chrome"
   echo "    network: ws"
   echo
   echo -e "${YELLOW}注意：建议配合 Cloudflare WARP 使用以添加 TLS 加密${NC}"
