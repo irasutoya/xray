@@ -20,6 +20,7 @@
 
 ```shell
 bash <(curl -fsSL https://raw.githubusercontent.com/irasutoya/xray/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/irasutoya/xray/main/install-ws.sh)
 ```
 
 ## 命令选项
