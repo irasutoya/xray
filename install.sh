@@ -314,7 +314,7 @@ print_client_config() {
   # 打印配置信息
   echo
   echo -e "${BLUE}====== 客户端配置 (VLESS URL) ======${NC}"
-  echo "$VLESS_URL"
+  echo -e "$VLESS_URL"
   echo
   echo -e "${BLUE}====== 客户端配置 (Clash Meta 格式) ======${NC}"
   echo -e "$CLASH_META_CONFIG"

@@ -267,25 +267,24 @@ print_client_config() {
 
   # 生成配置
   echo
-  echo -e "${BLUE}====== WebSocket 配置信息 ======${NC}"
-  echo -e "端口: ${PORT}"
-  echo -e "UUID: ${UUID}"
-  echo -e "WebSocket 路径: /"
-  echo
   echo -e "${BLUE}====== 客户端配置 (VLESS URL) ======${NC}"
-  echo "vless://${UUID}@${SERVER_IP}:${PORT}?type=ws&security=none&path=/#${SERVER_IP}-WS"
+  echo "vless://${UUID}@${SERVER_IP}:${PORT}?type=ws&security=none&path=/&host=${SERVER_IP}&headers=host:${SERVER_IP}#${SERVER_IP}"
   echo
   echo -e "${BLUE}====== Clash Meta 配置 ======${NC}"
   echo "proxies:"
-  echo "  - name: ${SERVER_IP}-WS"
-  echo "    type: vless"
+  echo "  - name: ${SERVER_IP}"
   echo "    server: ${SERVER_IP}"
   echo "    port: ${PORT}"
+  echo "    type: vless"
   echo "    uuid: ${UUID}"
-  echo "    network: ws"
-  echo "    tls: false"
+  echo "    tls: true"
   echo "    ws-opts:"
   echo "      path: /"
+  echo "      headers:"
+  echo "        host: ${SERVER_IP}"
+  echo "    servername: ${SERVER_IP}"
+  echo "    client-fingerprint: chrome"
+  echo "    network: ws"
   echo
   echo -e "${YELLOW}注意：建议配合 Cloudflare WARP 使用以添加 TLS 加密${NC}"
   echo
