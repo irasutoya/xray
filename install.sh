@@ -303,6 +303,8 @@ print_client_config() {
     type: vless
     uuid: ${UUID}
     tls: true
+    udp: true
+    tfo: false
     flow: xtls-rprx-vision
     reality-opts:
       public-key: ${PUBLIC_KEY}
