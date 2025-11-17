@@ -278,6 +278,8 @@ print_client_config() {
   echo "    type: vless"
   echo "    uuid: ${UUID}"
   echo "    tls: true"
+  echo "    udp: true"
+  echo "    tfo: false"
   echo "    ws-opts:"
   echo "      path: /"
   echo "      headers:"
