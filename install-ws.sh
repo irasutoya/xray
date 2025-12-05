@@ -101,12 +101,12 @@ fi
 install_dependencies() {
   log "安装必要的依赖..."
   if command -v apt-get > /dev/null; then
-    apt-get update -qq && apt-get install -y -qq curl wget jq || {
+    apt-get update -qq && apt-get install -y -qq curl wget jq unzip || {
       error "安装依赖失败，请检查网络连接或手动安装"
       exit 1
     }
   elif command -v yum > /dev/null; then
-    yum install -y -q curl wget jq || {
+    yum install -y -q curl wget jq unzip || {
       error "安装依赖失败，请检查网络连接或手动安装"
       exit 1
     }
@@ -115,6 +115,16 @@ install_dependencies() {
     exit 1
   fi
   log "依赖安装完成！"
+}
+
+verify_dependencies() {
+  DEPS=(curl wget jq unzip)
+  for dep in "${DEPS[@]}"; do
+    if ! command -v "$dep" >/dev/null 2>&1; then
+      error "缺少依赖: $dep"
+      exit 1
+    fi
+  done
 }
 
 # 检测系统架构
@@ -327,6 +337,7 @@ trap cleanup INT TERM
 main() {
   log "开始安装 Xray..."
   install_dependencies
+  verify_dependencies
   determine_architecture
   install_xray
   create_config_file
