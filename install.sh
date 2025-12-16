@@ -8,7 +8,7 @@ INSTALL_DIR="${BASE_DIR}/bin"
 CONFIG_DIR="${BASE_DIR}/config"
 SERVICE_FILE="/etc/systemd/system/xray.service"
 CONFIG_FILE="${CONFIG_DIR}/config.json"
-DOMAIN="addons.mozilla.org"
+DOMAIN="updates.cdn-apple.com"
 PORT=443
 UUID=$(cat /proc/sys/kernel/random/uuid)
 PRIVATE_KEY=""
@@ -256,7 +256,7 @@ create_config_file() {
           "serverNames": ["${DOMAIN}"],
           "privateKey": "${PRIVATE_KEY}",
           "shortIds": ["${SHORT_ID}"],
-          "fingerprint": "firefox"
+          "fingerprint": "ios"
         }
       }
     }
@@ -306,7 +306,7 @@ print_client_config() {
     SERVER_IP="localhost"
   fi
 
-  VLESS_URL="vless://${UUID}@${SERVER_IP}:${PORT}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${DOMAIN}&fp=firefox&pbk=${PUBLIC_KEY}&sid=${SHORT_ID}#${SERVER_IP}"
+  VLESS_URL="vless://${UUID}@${SERVER_IP}:${PORT}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${DOMAIN}&fp=ios&pbk=${PUBLIC_KEY}&sid=${SHORT_ID}#${SERVER_IP}"
   MIHOMO_CONFIG="proxies:
   - name: ${SERVER_IP}
     server: ${SERVER_IP}
@@ -320,7 +320,7 @@ print_client_config() {
       public-key: ${PUBLIC_KEY}
       short-id: ${SHORT_ID}
     servername: ${DOMAIN}
-    client-fingerprint: firefox
+    client-fingerprint: ios
     network: tcp"
 
   echo
