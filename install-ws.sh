@@ -275,30 +275,29 @@ print_client_config() {
     SERVER_IP="localhost"
   fi
 
-  # 生成配置
+  VLESS_URL="vless://${UUID}@${SERVER_IP}:${PORT}?type=ws&security=tls&path=/&host=${SERVER_IP}&sni=${SERVER_IP}#${SERVER_IP}"
+  MIHOMO_CONFIG="proxies:
+  - name: ${SERVER_IP}
+    server: ${SERVER_IP}
+    port: ${PORT}
+    type: vless
+    uuid: ${UUID}
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    ws-opts:
+      path: /
+      headers:
+        host: ${SERVER_IP}
+    servername: ${SERVER_IP}
+    network: ws"
+
   echo
-  echo -e "${BLUE}====== 客户端配置 (VLESS URL) ======${NC}"
-  echo "vless://${UUID}@${SERVER_IP}:${PORT}?type=ws&security=tls&path=/&host=${SERVER_IP}&sni=${SERVER_IP}#${SERVER_IP}"
+  echo -e "${BLUE}====== 客户端配置 (Vless URL) ======${NC}"
+  echo -e "$VLESS_URL"
   echo
-  echo -e "${BLUE}====== 客户端配置 (Clash Meta 格式) ======${NC}"
-  echo "proxies:"
-  echo "  - name: ${SERVER_IP}"
-  echo "    server: ${SERVER_IP}"
-  echo "    port: ${PORT}"
-  echo "    type: vless"
-  echo "    uuid: ${UUID}"
-  echo "    tls: true"
-  echo "    udp: true"
-  echo "    tfo: false"
-  echo "    ws-opts:"
-  echo "      path: /"
-  echo "      headers:"
-  echo "        host: ${SERVER_IP}"
-  echo "    servername: ${SERVER_IP}"
-  echo "    client-fingerprint: chrome"
-  echo "    network: ws"
-  echo
-  echo -e "${YELLOW}注意：建议配合 Cloudflare WARP 使用以添加 TLS 加密${NC}"
+  echo -e "${BLUE}====== 客户端配置 (Mihomo 配置) ======${NC}"
+  echo -e "$MIHOMO_CONFIG"
   echo
 }
 

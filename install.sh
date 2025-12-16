@@ -8,7 +8,7 @@ INSTALL_DIR="${BASE_DIR}/bin"
 CONFIG_DIR="${BASE_DIR}/config"
 SERVICE_FILE="/etc/systemd/system/xray.service"
 CONFIG_FILE="${CONFIG_DIR}/config.json"
-DOMAIN="updates.cdn-apple.com"
+DOMAIN="addons.mozilla.org"
 PORT=443
 UUID=$(cat /proc/sys/kernel/random/uuid)
 PRIVATE_KEY=""
@@ -252,10 +252,11 @@ create_config_file() {
         "security": "reality",
         "realitySettings": {
           "show": false,
-          "dest": "${DOMAIN}:443",
+          "target": "${DOMAIN}:443",
           "serverNames": ["${DOMAIN}"],
           "privateKey": "${PRIVATE_KEY}",
-          "shortIds": ["${SHORT_ID}"]
+          "shortIds": ["${SHORT_ID}"],
+          "fingerprint": "firefox"
         }
       }
     }
@@ -305,8 +306,8 @@ print_client_config() {
     SERVER_IP="localhost"
   fi
 
-  VLESS_URL="vless://${UUID}@${SERVER_IP}:${PORT}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${DOMAIN}&fp=chrome&pbk=${PUBLIC_KEY}&sid=${SHORT_ID}#${SERVER_IP}"
-  CLASH_META_CONFIG="proxies:
+  VLESS_URL="vless://${UUID}@${SERVER_IP}:${PORT}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${DOMAIN}&fp=firefox&pbk=${PUBLIC_KEY}&sid=${SHORT_ID}#${SERVER_IP}"
+  MIHOMO_CONFIG="proxies:
   - name: ${SERVER_IP}
     server: ${SERVER_IP}
     port: ${PORT}
@@ -314,22 +315,20 @@ print_client_config() {
     uuid: ${UUID}
     tls: true
     udp: true
-    tfo: false
     flow: xtls-rprx-vision
     reality-opts:
       public-key: ${PUBLIC_KEY}
       short-id: ${SHORT_ID}
     servername: ${DOMAIN}
-    client-fingerprint: chrome
+    client-fingerprint: firefox
     network: tcp"
 
-  # 打印配置信息
   echo
-  echo -e "${BLUE}====== 客户端配置 (VLESS URL) ======${NC}"
+  echo -e "${BLUE}====== 客户端配置 (Vless URL) ======${NC}"
   echo -e "$VLESS_URL"
   echo
-  echo -e "${BLUE}====== 客户端配置 (Clash Meta 格式) ======${NC}"
-  echo -e "$CLASH_META_CONFIG"
+  echo -e "${BLUE}====== 客户端配置 (Mihomo 配置) ======${NC}"
+  echo -e "$MIHOMO_CONFIG"
   echo
 }
 

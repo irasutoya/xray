@@ -8,7 +8,7 @@
 - 自动生成 REALITY 密钥对
 - 配置 VLESS + Vision + REALITY 协议
 - 创建并启用 systemd 服务
-- 生成客户端配置信息（VLESS URL 和 Clash Meta 格式）
+- 生成客户端配置信息（Vless URL 和 Mihomo 配置）
 
 ## 系统要求
 
@@ -20,7 +20,6 @@
 
 ```shell
 bash <(curl -fsSL https://raw.githubusercontent.com/irasutoya/xray/main/install.sh)
-bash <(curl -fsSL https://raw.githubusercontent.com/irasutoya/xray/main/install-ws.sh)
 ```
 
 ## 命令选项
