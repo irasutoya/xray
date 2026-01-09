@@ -284,7 +284,6 @@ print_client_config() {
     uuid: ${UUID}
     tls: true
     udp: true
-    flow: xtls-rprx-vision
     ws-opts:
       path: /
       headers:
